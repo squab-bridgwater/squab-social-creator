@@ -3,9 +3,10 @@
 A free, browser-based workflow for planning, creating, reviewing and exporting
 Squab Storage Bridgwater social content.
 
-The app includes detailed campaign weighting, a verified facts library,
-reusable local photography, saved campaign management, six artwork systems,
-publishing statuses and multi-format exports.
+The app includes 15 campaign-style presets, automatic topic planning, optional
+priority controls, a verified facts library, reusable local photography, saved
+campaign management, six artwork systems, publishing statuses and multi-format
+exports.
 
 Public website:
 
