@@ -15,7 +15,8 @@
     "typescript": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.1",
+    "canvg": "^4.0.3"
   },
   "devDependencies": {}
 }
