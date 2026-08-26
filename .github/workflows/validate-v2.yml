@@ -24,5 +24,7 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Typecheck V2 source
+        run: npm run typecheck
       - name: Build V2 source
         run: npm run build
