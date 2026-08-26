@@ -1,28 +1,39 @@
 # Squab Social Creator
 
-A free, browser-based workflow for planning, creating, reviewing and exporting
-Squab Storage Bridgwater social content.
+A browser-based workflow for planning, creating, reviewing and exporting Squab Storage Bridgwater social content.
 
-The app includes 15 campaign-style presets, automatic topic planning, optional
-priority controls, a verified facts library, reusable local photography, saved
-campaign management, six artwork systems, publishing statuses and multi-format
-exports.
+## V2 development rebuild
 
-Public website:
+The editable application source has now been reconstructed under `source/` on the V2 development branch. The working workflow keeps the existing batch-first process while expanding the artwork system to 24 templates across 12 genuinely different design families.
 
-https://squab-bridgwater.github.io/squab-social-creator/
+V2 includes:
 
-The working agreement and product boundaries are documented in
-[`PROJECT_BRIEF.md`](PROJECT_BRIEF.md).
+- guided five-step batch and one-off workflow
+- 15 campaign-direction presets
+- prepared ChatGPT prompt and structured JSON import
+- legacy template-ID compatibility
+- 24 artwork templates across 12 layout families
+- official Squab logo treatment in a controlled non-photographic zone
+- reusable local photography library
+- saved campaign library
+- editable copy, objectives, CTA, dates and output formats
+- portrait, square and LinkedIn artwork generation
+- per-post and batch QA
+- contact sheet, captions, schedule and campaign JSON exports
+- complete ZIP publishing pack with PNG artwork and instructions
+- human approval before anything is scheduled or published
+
+The live public app remains the version deployed from `main`. Development work must stay off `main` until it has been reviewed and explicitly approved.
 
 ## Development
 
 ```bash
 npm install
+npm run typecheck
 npm run dev
 npm run build
 ```
 
-The editable application source is under `source/`. The Vite build produces a
-self-contained `dist/index.html`. Copy that file to the repository root before
-deployment because GitHub Pages publishes the root `index.html`.
+Vite uses `source/` as the application root and writes the production build to `dist/`. The GitHub Pages deployment workflow is prepared to publish `dist/` only after approved changes eventually reach `main`.
+
+The product boundaries and workflow are documented in [`PROJECT_BRIEF.md`](PROJECT_BRIEF.md), with the expanded design direction in [`DESIGN_SYSTEM_V2_PLAN.md`](DESIGN_SYSTEM_V2_PLAN.md).
