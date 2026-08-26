@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - dev/source-recovery
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,10 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm install
-      - run: npm run build
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build V2 source
+        run: npm run build
