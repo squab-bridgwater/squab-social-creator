@@ -17,26 +17,34 @@ CAMPAIGN
 - Platforms: ${campaign.platforms || 'Facebook and Instagram'}
 
 BRAND AND TONE
-- Warm, calm, clear, practical and human.
-- Use plain English and a light touch. Never use fake urgency or aggressive sales language.
-- Benefits before feature dumping.
-- Keep the artwork copy concise enough to work at phone size.
-- The artwork uses Lato and approved Squab orange/black/white brand colours.
-- Imagery should show the genuine reason storage is useful, such as moving pressure, renovation disruption, business stock or lack of space. Avoid spotless empty rooms.
+- Warm, calm, clear, empathetic, practical and human: "warm with a wink" when gentle humour fits naturally.
+- Use plain English, short sentences and quiet confidence.
+- Never use fake urgency, pressure, corporate jargon, exaggerated claims or excessive exclamation marks.
+- Lead with how life becomes easier, then explain relevant features.
+- Keep artwork copy concise enough to work at phone size.
+- Artwork uses Lato and the approved Squab orange, black, charcoal and white brand system.
+- Imagery must show the customer's genuine problem or transition, such as moving pressure, renovation disruption, downsizing decisions, business stock or lack of space. Avoid spotless empty rooms and generic luxury interiors.
 
 VERIFIED FACTS
 ${verifiedFacts.map(fact => `- ${fact}`).join('\n')}
 
 CONTENT MIX
-For a nine-post batch, create a useful balance of awareness, engagement and conversion content. Do not make every post promotional. Use a mixture of household storage, business storage and other relevant Squab services where it makes sense for this campaign direction.
+${count === 9 ? `Create exactly three Awareness posts, three Engagement posts and three Conversion posts.
+- Awareness: useful or reassuring content with no hard CTA.
+- Engagement: invite a message, comment or conversation.
+- Conversion: use a calm, clear quote, call or website action, especially where service, pricing or local help makes that appropriate.` : `Choose the objective that best fits this one-off post. Do not force a conversion CTA if awareness or engagement is more appropriate.`}
+Use the selected campaign direction and seasonality to choose the service/topic weighting. Do not use a permanently fixed service balance.
 
 CTA RULES
-Use a mixture of awareness-only, soft engagement and conversion CTAs. Keep contact details in captions rather than crowding the artwork.
+- Keep contact information mainly in the caption rather than crowding the artwork.
+- Facebook can use a website link, message action or telephone CTA.
+- Instagram should favour a direct message or link-in-profile wording because caption links are not clickable.
+- Do not invent a phone number or enquiry URL. Only include contact details when supplied and verified.
 
 TEMPLATE IDS
 Choose an appropriate template ID for every post from this list only:
 ${templateIds}
-Use strong variety across a batch. Do not repeat the same exact template in a nine-post batch unless absolutely necessary.
+For a nine-post batch, use at least six different template families where the content permits. Do not repeat the same exact template unless necessary, and avoid visually similar layouts next to each other.
 
 OUTPUT
 Return valid JSON only with this structure:
@@ -68,8 +76,8 @@ Return valid JSON only with this structure:
       ],
       "footerTitle": "Squab Storage Bridgwater",
       "footerLine": "Short local reassurance",
-      "imageBrief": "Specific realistic image brief",
-      "caption": "Complete Facebook/Instagram caption with suitable hashtags",
+      "imageBrief": "Specific realistic image brief showing the need for storage",
+      "caption": "Complete platform-ready caption with suitable hashtags",
       "suggestedDate": "YYYY-MM-DD",
       "suggestedTime": "HH:MM",
       "ctaType": "Awareness only",
@@ -80,5 +88,5 @@ Return valid JSON only with this structure:
   ]
 }
 
-Return exactly ${count} post${count === 1 ? '' : 's'}. Each post must contain exactly three benefits. Do not invent facilities, offers, discounts, prices or opening hours.`;
+Return exactly ${count} post${count === 1 ? '' : 's'}. Each post must contain exactly three benefits. Do not invent facilities, offers, discounts, prices, phone numbers, URLs or opening hours.`;
 }
