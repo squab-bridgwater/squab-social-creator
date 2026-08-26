@@ -26,8 +26,14 @@ export const campaignPresets: CampaignPreset[] = [
 
 export const verifiedFacts = [
   'Squab Storage serves customers in Bridgwater, Somerset.',
-  'Squab provides self storage, business storage, offices and workspaces.',
-  'The social workflow should keep pricing language transparent and avoid fake urgency.',
-  'Customers can speak with the Squab team for help choosing an appropriate storage option.',
-  'Artwork and captions require human approval before publishing.',
+  'Squab provides home/self storage, business storage, offices and workspaces.',
+  'Squab publishes storage prices online so customers can see pricing before providing personal details.',
+  'Promotions should be explained honestly, including the standard rate that applies after a promotion.',
+  'After a promotional period ends, Squab aims to keep the standard store rate stable for up to 12 months rather than creating immediate price surprises.',
+  'Storage pricing varies by local market, demand and property costs, so do not imply every Squab location has the same price.',
+  'Squab does not impose exit charges for ordinary storage use; offer-specific minimum stays can still have their own terms.',
+  'Self-storage customers can access their goods from 8am to 8pm, seven days a week.',
+  'Squab facilities use recorded CCTV and security systems; do not invent additional security claims beyond the supplied facts.',
+  'Customers can ask the Squab team for help choosing an appropriate storage size.',
+  'Human approval is required before social artwork or captions are scheduled or published.',
 ];
