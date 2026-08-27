@@ -24,7 +24,7 @@ export const templates: TemplateDefinition[] = [
   { id: 'trust-security', name: 'Trust & Security', family: 'Trust & Security', variant: 'Hero', categories: ['Trust','Photo-led'], suitableObjectives: ['Awareness','Conversion'], imageLed: true, tone: 'dark', artDirection: 'Macro security photography, industrial crop, confident vertical trust markers.' },
   { id: 'creative-tactile', name: 'Creative / Tactile', family: 'Creative / Tactile', variant: 'Hero', categories: ['Editorial','Advice','Playful'], suitableObjectives: ['Awareness','Engagement'], imageLed: false, tone: 'mixed', artDirection: 'Torn paper, tape, ink strokes, imperfect print textures and handmade collage depth.' },
   { id: 'minimal-striking', name: 'Minimal & Striking', family: 'Minimal & Striking', variant: 'Hero', categories: ['Trust','Editorial'], suitableObjectives: ['Awareness'], imageLed: true, tone: 'dark', artDirection: 'Architectural negative space, extreme restraint and a single high-impact orange intervention.' },
-  { id: 'playful-unexpected', name: 'Playful & Unexpected', family: 'Playful & Unexpected', variant: 'Hero', categories: ['Playful','Photo-led','Engagement'], suitableObjectives: ['Awareness','Engagement'], imageLed: true, tone: 'mixed', artDirection: 'Surprising scale, witty visual metaphor and social-native cut-out energy.' },
+  { id: 'playful-unexpected', name: 'Playful & Unexpected', family: 'Playful & Unexpected', variant: 'Hero', categories: ['Playful','Photo-led'], suitableObjectives: ['Awareness','Engagement'], imageLed: true, tone: 'mixed', artDirection: 'Surprising scale, witty visual metaphor and social-native cut-out energy.' },
 ];
 
 export const legacyTemplateMap: Record<string, string> = {
