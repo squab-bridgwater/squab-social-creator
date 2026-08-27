@@ -1,6 +1,9 @@
 name: Validate V2 source
 
 on:
+  push:
+    branches:
+      - dev/v2-source-rebuild
   pull_request:
     branches:
       - dev/source-recovery
@@ -11,7 +14,9 @@ permissions:
 
 jobs:
   build:
+    name: Typecheck and build V2
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,5 +26,14 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Typecheck V2 source
+        run: npm run typecheck
       - name: Build V2 source
         run: npm run build
+      - name: Upload release-review build
+        uses: actions/upload-artifact@v4
+        with:
+          name: squab-social-creator-v2-review
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
