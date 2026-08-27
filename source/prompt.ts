@@ -4,7 +4,7 @@ import { templates } from './templates/registry';
 import { verifiedFacts } from './data/presets';
 
 export function buildCampaignPrompt(campaign: Campaign, preset: CampaignPreset): string {
-  const templateIds = templates.map(t => t.id).join(', ');
+  const directions = templates.map(t => `- ${t.id}: ${t.artDirection}`).join('\n');
   const count = campaign.mode === 'one-off' ? 1 : 9;
   return `Create ${count === 1 ? 'one social post' : 'a nine-post social content package'} for Squab Storage Bridgwater.
 
@@ -25,6 +25,9 @@ BRAND AND TONE
 - Artwork uses Lato and the approved Squab orange, black, charcoal and white brand system.
 - Imagery must show the customer's genuine problem or transition, such as moving pressure, renovation disruption, downsizing decisions, business stock or lack of space. Avoid spotless empty rooms and generic luxury interiors.
 
+CREATIVE DIRECTION
+The artwork system is built around premium social art direction, not presentation layouts. Write copy and image briefs that support dramatic scale, cinematic photography, cropped typography, editorial collage, tactile marks, asymmetry, visual metaphors and social-native energy where appropriate. Do not write content that needs a dense grid, brochure panel or long list to make sense.
+
 VERIFIED FACTS
 ${verifiedFacts.map(fact => `- ${fact}`).join('\n')}
 
@@ -41,10 +44,10 @@ CTA RULES
 - Instagram should favour a direct message or link-in-profile wording because caption links are not clickable.
 - Do not invent a phone number or enquiry URL. Only include contact details when supplied and verified.
 
-TEMPLATE IDS
-Choose an appropriate template ID for every post from this list only:
-${templateIds}
-For a nine-post batch, use at least six different template families where the content permits. Do not repeat the same exact template unless necessary, and avoid visually similar layouts next to each other.
+ART-DIRECTION IDS
+Choose the strongest creative direction for each post from this list only:
+${directions}
+For a nine-post batch, use at least six different art-direction families. Avoid repeating the same exact direction unless the content genuinely demands it. Vary the emotional rhythm of the feed: some cinematic, some tactile, some minimal, some playful, some people-led.
 
 OUTPUT
 Return valid JSON only with this structure:
@@ -62,9 +65,9 @@ Return valid JSON only with this structure:
       "service": "Self Storage",
       "subtopic": "Specific useful topic",
       "objective": "Awareness",
-      "template": "full-bleed-hero",
+      "template": "bold-impact",
       "eyebrow": "Short eyebrow",
-      "headline": "Main artwork headline",
+      "headline": "Short high-impact artwork headline",
       "answer": "Short supporting answer",
       "support": "Short supporting line",
       "badgeTop": "Optional short badge",
@@ -76,7 +79,7 @@ Return valid JSON only with this structure:
       ],
       "footerTitle": "Squab Storage Bridgwater",
       "footerLine": "Short local reassurance",
-      "imageBrief": "Specific realistic image brief showing the need for storage",
+      "imageBrief": "Specific realistic cinematic image brief with subject, setting, action, crop and visual tension",
       "caption": "Complete platform-ready caption with suitable hashtags",
       "suggestedDate": "YYYY-MM-DD",
       "suggestedTime": "HH:MM",
