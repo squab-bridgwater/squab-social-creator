@@ -8,7 +8,7 @@ export const brand = {
     charcoal: '#313131',
     grey: '#d2d2d2',
     white: '#ffffff',
-  },
+  } as Record<'orange' | 'orangeDark' | 'orangeMid' | 'orangeSoft' | 'black' | 'charcoal' | 'grey' | 'white', string>,
   gradient: ['#f4941e', '#e95822'] as const,
   font: {
     family: 'Lato, Arial, sans-serif',
