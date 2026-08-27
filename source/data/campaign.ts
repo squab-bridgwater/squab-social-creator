@@ -5,7 +5,7 @@ const STORAGE_KEY='squab-social-creator-v2-campaign';
 const templateIds=new Set(templates.map(template=>template.id));
 const objectives=['Awareness','Engagement','Conversion'];
 const statuses=['Draft','Ready for review','Approved','Published'];
-const allowedFormats:OutputFormat[]=['portrait','square','linkedin'];
+const allowedFormats:OutputFormat[]=['portrait','square','story','linkedin'];
 
 function asText(value:unknown,fallback=''):string{return typeof value==='string'?value.trim():fallback}
 function stripCodeFences(text:string):string{return text.trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'').trim()}
@@ -15,12 +15,12 @@ function normalisePost(raw:any,index:number):SocialPost{
  if(!raw||typeof raw!=='object')throw new Error(`Post ${index+1} is not a valid object.`);
  const rawBenefits=Array.isArray(raw.benefits)?raw.benefits:[];
  if(rawBenefits.length!==3)throw new Error(`Post ${index+1} must contain exactly three benefits.`);
- const template=normaliseTemplateId(asText(raw.template,'full-bleed-hero'));
+ const template=normaliseTemplateId(asText(raw.template,'bold-impact'));
  return{
   id:asText(raw.id,`post-${index+1}`),name:asText(raw.name,`Post ${index+1}`),service:asText(raw.service,'Self Storage'),subtopic:asText(raw.subtopic)||undefined,
-  objective:objectives.includes(raw.objective)?raw.objective:'Awareness',template:templateIds.has(template)?template:'full-bleed-hero',eyebrow:asText(raw.eyebrow,'Squab Storage'),headline:asText(raw.headline,'More room for what comes next'),answer:asText(raw.answer),support:asText(raw.support??raw.supportingLine),badgeTop:asText(raw.badgeTop,'BRIDGWATER'),badgeBottom:asText(raw.badgeBottom,'SQUAB STORAGE'),
+  objective:objectives.includes(raw.objective)?raw.objective:'Awareness',template:templateIds.has(template)?template:'bold-impact',eyebrow:asText(raw.eyebrow,'Squab Storage'),headline:asText(raw.headline,'More room for what comes next'),answer:asText(raw.answer),support:asText(raw.support??raw.supportingLine),badgeTop:asText(raw.badgeTop,'BRIDGWATER'),badgeBottom:asText(raw.badgeBottom,'SQUAB STORAGE'),
   benefits:rawBenefits.map((item:any,benefitIndex:number)=>{if(!item||typeof item!=='object')throw new Error(`Benefit ${benefitIndex+1} in post ${index+1} is invalid.`);return{title:asText(item.title),body:asText(item.body??item.text)}}),
-  footerTitle:asText(raw.footerTitle,'Squab Storage Bridgwater'),footerLine:asText(raw.footerLine,'Local space. Real help.'),image:asText(raw.image)||undefined,imageBrief:asText(raw.imageBrief)||undefined,caption:asText(raw.caption),suggestedDate:asText(raw.suggestedDate??raw.date),suggestedTime:asText(raw.suggestedTime??raw.time,'10:00'),ctaType:asText(raw.ctaType,'Awareness only'),contactDetails:asText(raw.contactDetails)||undefined,formats:formatsFrom(raw.formats),publicationStatus:statuses.includes(raw.publicationStatus)?raw.publicationStatus:'Draft'
+  footerTitle:asText(raw.footerTitle,'Squab Storage Bridgwater'),footerLine:asText(raw.footerLine,'Local space. Real help.'),image:asText(raw.image)||undefined,secondaryImage:asText(raw.secondaryImage)||undefined,imageBrief:asText(raw.imageBrief)||undefined,caption:asText(raw.caption),suggestedDate:asText(raw.suggestedDate??raw.date),suggestedTime:asText(raw.suggestedTime??raw.time,'10:00'),ctaType:asText(raw.ctaType,'Awareness only'),contactDetails:asText(raw.contactDetails)||undefined,formats:formatsFrom(raw.formats),publicationStatus:statuses.includes(raw.publicationStatus)?raw.publicationStatus:'Draft'
  };
 }
 
