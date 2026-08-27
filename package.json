@@ -16,7 +16,8 @@
     "react": "latest",
     "react-dom": "latest",
     "jszip": "^3.10.1",
-    "canvg": "^4.0.3"
+    "canvg": "^4.0.3",
+    "vite-plugin-singlefile": "^2.3.0"
   },
   "devDependencies": {
     "@types/react": "latest",
