@@ -30,3 +30,10 @@ jobs:
         run: npm run typecheck
       - name: Build V2 source
         run: npm run build
+      - name: Upload release-review build
+        uses: actions/upload-artifact@v4
+        with:
+          name: squab-social-creator-v2-review
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
