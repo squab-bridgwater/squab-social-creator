@@ -18,5 +18,8 @@
     "jszip": "^3.10.1",
     "canvg": "^4.0.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest"
+  }
 }
