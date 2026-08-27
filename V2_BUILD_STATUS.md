@@ -24,6 +24,19 @@ The V2 artwork system has been pushed away from flat colour swaps and now uses g
 
 Brand styling uses the approved Lato family, Squab palette, orange gradient, organic curves, layered cards, controlled shadows and clean logo treatment. The logo is not redrawn, circled, shadowed or placed directly over photography.
 
+The 24-template contact sheet has been manually reviewed for overall family separation, hierarchy, spacing and logo treatment. The placeholder imagery used for QA is deliberately generic and is not publication imagery.
+
 ## Validation
 
-A development-only validation workflow is present. The first GitHub Actions attempt failed before any build steps were executed, so the source still requires a clean CI typecheck/build before it can be considered technically release-ready. This does not affect the existing live site because `main` has not been changed.
+The development branch now passes the full GitHub Actions validation workflow:
+
+- dependency installation: pass
+- TypeScript typecheck: pass
+- production Vite build: pass
+- release-review artifact creation: pass
+
+The built review artifact is retained by GitHub Actions for seven days. No deployment is performed from this branch.
+
+## Current gate
+
+Technical validation is complete. The remaining gate is human visual approval of the expanded template direction before any pull request is created or retargeted toward `main`.
