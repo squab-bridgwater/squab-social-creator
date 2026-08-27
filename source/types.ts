@@ -1,6 +1,6 @@
 export type Objective = 'Awareness' | 'Engagement' | 'Conversion';
 export type PublicationStatus = 'Draft' | 'Ready for review' | 'Approved' | 'Published';
-export type OutputFormat = 'portrait' | 'square' | 'linkedin';
+export type OutputFormat = 'portrait' | 'square' | 'story' | 'linkedin';
 
 export type Benefit = {
   title: string;
@@ -24,6 +24,7 @@ export type SocialPost = {
   footerTitle: string;
   footerLine: string;
   image?: string;
+  secondaryImage?: string;
   imageBrief?: string;
   caption: string;
   suggestedDate: string;
