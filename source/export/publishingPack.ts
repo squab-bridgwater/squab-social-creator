@@ -5,17 +5,11 @@ import { renderArtworkSvg } from '../render/artwork';
 
 function download(name:string,blob:Blob){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function slug(value:string){return value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'squab-campaign'}
-const dimensions:Record<OutputFormat,[number,number]>={portrait:[1080,1350],square:[1080,1080],linkedin:[1200,1200]};
+const dimensions:Record<OutputFormat,[number,number]>={portrait:[1080,1350],square:[1080,1080],story:[1080,1920],linkedin:[1200,1200]};
 
 async function canvasToBlob(canvas:HTMLCanvasElement):Promise<Blob>{return await new Promise<Blob>((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('PNG could not be created.')),'image/png'))}
-async function svgToPng(svg:string,format:OutputFormat):Promise<Blob>{
- await document.fonts.ready;
- const[w,h]=dimensions[format],canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas is unavailable.');
- const renderer=Canvg.fromString(ctx,svg,{ignoreAnimation:true,ignoreMouse:true});await renderer.render();return canvasToBlob(canvas);
-}
-async function svgToPngAtSize(svg:string,width:number,height:number):Promise<Blob>{
- await document.fonts.ready;const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas is unavailable.');const renderer=Canvg.fromString(ctx,svg,{ignoreAnimation:true,ignoreMouse:true});await renderer.render();return canvasToBlob(canvas);
-}
+async function svgToPng(svg:string,format:OutputFormat):Promise<Blob>{await document.fonts.ready;const[w,h]=dimensions[format],canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas is unavailable.');const renderer=Canvg.fromString(ctx,svg,{ignoreAnimation:true,ignoreMouse:true});await renderer.render();return canvasToBlob(canvas)}
+async function svgToPngAtSize(svg:string,width:number,height:number):Promise<Blob>{await document.fonts.ready;const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas is unavailable.');const renderer=Canvg.fromString(ctx,svg,{ignoreAnimation:true,ignoreMouse:true});await renderer.render();return canvasToBlob(canvas)}
 
 export function captionsText(campaign:Campaign){return campaign.posts.map((post,index)=>`POST ${index+1}: ${post.headline}\nDate: ${post.suggestedDate} ${post.suggestedTime}\nCTA: ${post.ctaType}\nContact details: ${post.contactDetails||''}\n\n${post.caption}\n`).join('\n---\n\n')}
 export function scheduleCsv(campaign:Campaign){const rows=[['Post','Headline','Date','Time','Objective','Template','CTA','Status'],...campaign.posts.map((p,i)=>[String(i+1),p.headline,p.suggestedDate,p.suggestedTime,p.objective,p.template,p.ctaType,p.publicationStatus])];return rows.map(row=>row.map(value=>`"${String(value).replace(/"/g,'""')}"`).join(',')).join('\n')}
@@ -27,10 +21,4 @@ function contactSheetSvg(campaign:Campaign){const cellW=360,cellH=450,gap=24,col
 export async function exportContactSheet(campaign:Campaign){const sheet=contactSheetSvg(campaign),png=await svgToPngAtSize(sheet.svg,sheet.width,sheet.height);download(`${slug(campaign.name)}-contact-sheet.png`,png)}
 async function postArtworkFiles(post:SocialPost,index:number,campaign:Campaign,zip:JSZip){for(const format of post.formats){const png=await svgToPng(renderArtworkSvg(post,format),format);zip.file(`artwork/${String(index+1).padStart(2,'0')}-${slug(post.name||post.headline)}-${format}.png`,png)}}
 
-export async function exportPublishingPack(campaign:Campaign,onProgress?:(message:string)=>void){
- const zip=new JSZip();onProgress?.('Rendering artwork…');
- for(let i=0;i<campaign.posts.length;i++){onProgress?.(`Rendering artwork ${i+1} of ${campaign.posts.length}…`);await postArtworkFiles(campaign.posts[i],i,campaign,zip)}
- const sheet=contactSheetSvg(campaign);zip.file('contact-sheet.png',await svgToPngAtSize(sheet.svg,sheet.width,sheet.height));zip.file('captions.txt',captionsText(campaign));zip.file('posting-schedule.csv',scheduleCsv(campaign));zip.file('campaign.json',JSON.stringify(campaign,null,2));
- zip.file('README.txt',`SQUAB SOCIAL PUBLISHING PACK\n\n1. Review every artwork file at phone size.\n2. Check the photograph visibly supports the message.\n3. Read every caption and verify dates, facts and CTA details.\n4. Open Meta Business Suite and select the correct Squab Facebook and Instagram accounts.\n5. Upload the matching PNG and paste the matching caption.\n6. Preview and schedule only after human approval.\n\nGenerated ${new Date().toLocaleString('en-GB')}.`);
- onProgress?.('Building ZIP…');const blob=await zip.generateAsync({type:'blob'});download(`${slug(campaign.name)}-publishing-pack.zip`,blob);onProgress?.('Publishing pack downloaded.')
-}
+export async function exportPublishingPack(campaign:Campaign,onProgress?:(message:string)=>void){const zip=new JSZip();onProgress?.('Rendering artwork…');for(let i=0;i<campaign.posts.length;i++){onProgress?.(`Rendering artwork ${i+1} of ${campaign.posts.length}…`);await postArtworkFiles(campaign.posts[i],i,campaign,zip)}const sheet=contactSheetSvg(campaign);zip.file('contact-sheet.png',await svgToPngAtSize(sheet.svg,sheet.width,sheet.height));zip.file('captions.txt',captionsText(campaign));zip.file('posting-schedule.csv',scheduleCsv(campaign));zip.file('campaign.json',JSON.stringify(campaign,null,2));zip.file('README.txt',`SQUAB SOCIAL PUBLISHING PACK\n\n1. Review every artwork file at phone size.\n2. Check the photograph visibly supports the message.\n3. Read every caption and verify dates, facts and CTA details.\n4. Open Meta Business Suite and select the correct Squab Facebook and Instagram accounts.\n5. Upload the matching PNG and paste the matching caption.\n6. Preview and schedule only after human approval.\n\nGenerated ${new Date().toLocaleString('en-GB')}.`);onProgress?.('Building ZIP…');const blob=await zip.generateAsync({type:'blob'});download(`${slug(campaign.name)}-publishing-pack.zip`,blob);onProgress?.('Publishing pack downloaded.')}
